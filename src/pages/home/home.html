@@ -7,17 +7,8 @@
 </ion-header>>>
 
 <ion-content padding>
-  <p *ngIf="weather">
-    {{stringWeather}}
-    <br>
-    {{weather.weather[0].main}}
-    <br>
-    {{weather.weather[0].icon}}
-
-    <img alt="Icon weather"  src="{{getIconUrl()}}">
-  </p>
-
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <button ion-button icon-end (click)="goToLondonCity($event,'London')">
+    <ion-icon name="plus"></ion-icon>
+    Got to London city
+  </button>
 </ion-content>

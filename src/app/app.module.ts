@@ -9,11 +9,13 @@ import { WeatherProvider } from "../providers/weather/weather";
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { CityPage } from '../pages/city/city';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    CityPage
   ],
   imports: [
     BrowserModule,
@@ -23,7 +25,8 @@ import { HomePage } from '../pages/home/home';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    CityPage
   ],
   providers: [
     StatusBar,

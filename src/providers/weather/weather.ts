@@ -17,17 +17,20 @@ export class WeatherProvider {
   constructor(public httpClient: HttpClient) {
     console.log('Hello WeatherProvider Provider');
 
-    this.url = 'http://api.openweathermap.org/data/2.5/weather?q=London'+'&APPID='+this.apiKey;
+    //this.urlI = 'http://api.openweathermap.org/data/2.5/weather?q=London'+'&APPID='+this.apiKey;
+
+    this.url = 'http://api.openweathermap.org/data/2.5/weather?q=';
+
     this.urlIcon = 'http://openweathermap.org/img/w/';
   }
 
   //Following function takes city and state as an input
   getWeather(city, state) {
-    return this.httpClient.get(this.url+'/'+state+'/'+city+'.json')
+    return this.httpClient.get(this.url+'/'+state+'/'+city+'.json');
   }
 
-  getLondonWeather() {
-    return this.httpClient.get(this.url);
+  getCityWeather(city) {
+    return this.httpClient.get(this.url+city+'&APPID='+this.apiKey+'&units=metric');
   }
 
   getIconUrl(iconId) {
