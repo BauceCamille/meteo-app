@@ -1,0 +1,23 @@
+<<<ion-header>
+  <ion-navbar>
+    <ion-title>
+      MyWeatherApp
+    </ion-title>
+  </ion-navbar>
+</ion-header>>>
+
+<ion-content padding>
+  <p *ngIf="weather">
+    {{stringWeather}}
+    <br>
+    {{weather.weather[0].main}}
+    <br>
+    {{weather.weather[0].icon}}
+
+    <img alt="Icon weather"  src="{{getIconUrl()}}">
+  </p>
+
+  <p>
+    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
+  </p>
+</ion-content>
