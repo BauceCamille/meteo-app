@@ -13,7 +13,7 @@ export class HomePage {
 
   }
 
-    goToLondonCity(event,city){
+    goToCity(event,city){
     //console.log("plop");
       this.navCtrl.push(CityPage,{
         city: city

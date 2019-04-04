@@ -2,8 +2,25 @@ page-city {
 
 }
 
+ion-content {
+  background-image: url('../../assets/imgs/backgroung.jpg');
+  -webkit-background-image: url('../../assets/imgs/backgroung.jpg');
+}
+
 ion-grid {
+
+}
+
+ion-label {
+  color: white;
+}
+
+.text-center {
   text-align: center;
+}
+
+.tempMin {
+  color: #b2b2b2;
 }
 
 .city {
@@ -13,5 +30,23 @@ ion-grid {
   font-size: 15px;
 }
 .temp {
-  font-size: 60px;
+  font-size: 100px;
+}
+
+
+.icon {
+  height: 29px;
+}
+
+ion-grid {
+  height: 100%;
+
+  ion-row {
+    height: 50%;
+  }
+}
+
+.item-trns {
+  border-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
 }

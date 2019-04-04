@@ -6,30 +6,40 @@
   </ion-navbar>
 </ion-header>>>
 
-<ion-content padding>
+<ion-content overflow-scroll="false">
 
   <ion-grid *ngIf = "details">
     <ion-row>
       <ion-col >
         <!-- Displaying weather location -->
-        <h2 class="city">{{details.name}}</h2>
+        <ion-label class="city text-center">{{details.name}}</ion-label>
 
         <!--Displaying weather icon -->
-        <h3 class="weather">{{ details.weather[0].description }}</h3>
+        <ion-label class="weather text-center">{{ details.weather[0].description }}</ion-label>
 
         <!-- Displaying weather description -->
-        <h1 class="temp">{{details.main.temp}}°C</h1>
+        <ion-label *ngIf = "roundedTemperature" class="temp text-center">{{roundedTemperature}}°</ion-label>
 
 
       </ion-col>
 
     </ion-row>
-      <ion-col>
-
-
-      </ion-col>
 
     <ion-row>
+      <ion-col>
+
+        <ion-list *ngIf = "dailyWeatherList && dailyWeatherList.length>0">
+          <ion-item class="item-trns" *ngFor="let day of dailyWeatherList">
+            <ion-label item-left>{{day.dayName}}</ion-label>
+            <img item-left [src]="day.icon" alt="icon" class="icon">
+            <ion-label item-right class="tempMax text-center">{{day.tempMax}}</ion-label>
+            <ion-label item-right class="tempMin text-center">{{day.tempMin}}</ion-label>
+          </ion-item>
+
+
+        </ion-list>
+
+      </ion-col>
 
     </ion-row>
 

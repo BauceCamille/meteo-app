@@ -11,30 +11,29 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class WeatherProvider {
   apiKey = '0681a842a988449dc4fbde5fb00e7fc8';
-  url;
-  urlIcon;
+
+  unit = 'metric'
+
+  forecastURL = 'http://api.openweathermap.org/data/2.5/forecast?q=';
+  weatherURL = 'http://api.openweathermap.org/data/2.5/weather?q=';
+  iconURL = 'http://openweathermap.org/img/w/';
+
+  urlEnding;
 
   constructor(public httpClient: HttpClient) {
     console.log('Hello WeatherProvider Provider');
-
-    //this.urlI = 'http://api.openweathermap.org/data/2.5/weather?q=London'+'&APPID='+this.apiKey;
-
-    this.url = 'http://api.openweathermap.org/data/2.5/weather?q=';
-
-    this.urlIcon = 'http://openweathermap.org/img/w/';
+    this.urlEnding = '&APPID='+this.apiKey+'&units='+this.unit;
   }
 
-  //Following function takes city and state as an input
-  getWeather(city, state) {
-    return this.httpClient.get(this.url+'/'+state+'/'+city+'.json');
+  getCityWeather(city: string) {
+    return this.httpClient.get<any>(this.weatherURL+city+this.urlEnding);
   }
 
-  getCityWeather(city) {
-    return this.httpClient.get(this.url+city+'&APPID='+this.apiKey+'&units=metric');
+  getIconUrl(icon) {
+    return this.iconURL+icon+'.png';
   }
 
-  getIconUrl(iconId) {
-    return this.urlIcon+iconId+'.png';
+  getCityForecast(city: string) {
+    return this.httpClient.get<any>(this.forecastURL+city+this.urlEnding);
   }
-
 }
