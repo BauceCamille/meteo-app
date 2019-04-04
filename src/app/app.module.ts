@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { HttpClientModule } from "@angular/common/http";
 import { WeatherProvider } from "../providers/weather/weather";
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -32,6 +33,7 @@ import { CityPage } from '../pages/city/city';
     StatusBar,
     SplashScreen,
     WeatherProvider,
+    Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
