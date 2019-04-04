@@ -2,6 +2,10 @@ page-home {
 
 }
 
+ion-content {
+  //background-image: none;   if removed stay none even on city page
+}
+
 ion-item {
   padding: 0;
   margin: 0;
@@ -9,4 +13,8 @@ ion-item {
 
 ion-col.col {
   padding: 0;
+}
+
+ion-col{
+  background: transparent;
 }

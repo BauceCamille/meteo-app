@@ -10,40 +10,47 @@
 <ion-content >
 
   <ion-list *ngIf="cityList">
-    <ion-list-header>
-      Ma position
-    </ion-list-header>
-
-    <ion-list-header>
-      Favoris
-    </ion-list-header>
-
-    <ion-item *ngFor="let city of cityList">
-      <ion-row align-items-center>
-        <ion-col class="text-center" col-2>
-          <p>{{city.temp}}°C</p>
-        </ion-col>
-        <ion-col class="text-center" col-3>
-          <img [src]="city.icon" >
-        </ion-col>
-        <ion-col col-7>
-          <p style="font-size: 110%;">{{city.name}}</p>
-          <p>{{city.country}}</p>
-        </ion-col>
-      </ion-row>
-      <ion-icon item-end name="information-circle" (click)="navToCityDetails($event,city)"></ion-icon>
-    </ion-item>
+    <ion-item-group>
+      <ion-item-divider><p>Ma position</p></ion-item-divider>
+      <ion-item *ngIf="currentLocation">
+        <ion-row align-items-center>
+          <ion-col class="text-center" col-2>
+            <p>{{currentLocation.temp}}°C</p>
+          </ion-col>
+          <ion-col class="text-center" col-3>
+            <img [src]="currentLocation.icon" >
+          </ion-col>
+          <ion-col col-7>
+            <p style="font-size: 110%;">{{currentLocation.name}}</p>
+            <p>{{currentLocation.country}}</p>
+          </ion-col>
+        </ion-row>
+        <ion-icon item-end name="information-circle" (click)="navToCityDetails($event,currentLocation)"></ion-icon>
+      </ion-item>
+    </ion-item-group>
 
 
-    <!--
-  <ion-item class="item-trns" *ngFor="let city of cityList">
+    <ion-item-group>
+      <ion-item-divider><p>Favoris</p></ion-item-divider>
 
-    <ion-label item-left>{{day.dayName}}</ion-label>
-    <img item-left [src]="day.icon" alt="icon" class="icon">
-    <ion-label item-right class="tempMax text-center">{{day.tempMax}}</ion-label>
-    <ion-label item-right class="tempMin text-center">{{day.tempMin}}</ion-label>
+      <ion-item *ngFor="let city of cityList">
+        <ion-row align-items-center>
+          <ion-col class="text-center" col-2>
+            <p>{{city.temp}}°C</p>
+          </ion-col>
+          <ion-col class="text-center" col-3>
+            <img [src]="city.icon" >
+          </ion-col>
+          <ion-col col-7>
+            <p style="font-size: 110%;">{{city.name}}</p>
+            <p>{{city.country}}</p>
+          </ion-col>
+        </ion-row>
+        <ion-icon item-end name="information-circle" (click)="navToCityDetails($event,city)"></ion-icon>
+      </ion-item>
 
-  </ion-item>
-  -->
+    </ion-item-group>
+
+
   </ion-list>
 </ion-content>

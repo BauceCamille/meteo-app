@@ -15,7 +15,7 @@ export class WeatherProvider {
   unit = 'metric'
 
   forecastURL = 'http://api.openweathermap.org/data/2.5/forecast?q=';
-  weatherURL = 'http://api.openweathermap.org/data/2.5/weather?q=';
+  weatherURL = 'http://api.openweathermap.org/data/2.5/weather?';
   iconURL = 'http://openweathermap.org/img/w/';
 
   urlEnding;
@@ -26,7 +26,7 @@ export class WeatherProvider {
   }
 
   getCityWeather(city: string, country: string) {
-    return this.httpClient.get<any>(this.weatherURL+city+','+country+this.urlEnding);
+    return this.httpClient.get<any>(this.weatherURL+'q='+city+','+country+this.urlEnding);
   }
 
   getIconUrl(icon) {
@@ -35,5 +35,9 @@ export class WeatherProvider {
 
   getCityForecast(city: string, country: string) {
     return this.httpClient.get<any>(this.forecastURL+city+','+country+this.urlEnding);
+  }
+
+  getCityWeatherByCoordinates(lat: number, lon: number) {
+    return this.httpClient.get<any>(this.weatherURL+'lat='+lat+'&lon='+lon+this.urlEnding);
   }
 }
