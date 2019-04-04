@@ -5,6 +5,8 @@ page-city {
 ion-content {
   background-image: url('../../assets/imgs/backgroung.jpg');
   -webkit-background-image: url('../../assets/imgs/backgroung.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 ion-grid {

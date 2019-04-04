@@ -24,20 +24,21 @@
       </ion-col>
 
     </ion-row>
-
     <ion-row>
       <ion-col>
 
-        <ion-list *ngIf = "dailyWeatherList && dailyWeatherList.length>0">
+
+        <ion-list no-lines *ngIf = "dailyWeatherList && dailyWeatherList.length>0">
           <ion-item class="item-trns" *ngFor="let day of dailyWeatherList">
             <ion-label item-left>{{day.dayName}}</ion-label>
             <img item-left [src]="day.icon" alt="icon" class="icon">
             <ion-label item-right class="tempMax text-center">{{day.tempMax}}</ion-label>
             <ion-label item-right class="tempMin text-center">{{day.tempMin}}</ion-label>
           </ion-item>
-
-
         </ion-list>
+
+
+
 
       </ion-col>
 

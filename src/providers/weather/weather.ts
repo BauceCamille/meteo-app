@@ -25,15 +25,15 @@ export class WeatherProvider {
     this.urlEnding = '&APPID='+this.apiKey+'&units='+this.unit;
   }
 
-  getCityWeather(city: string) {
-    return this.httpClient.get<any>(this.weatherURL+city+this.urlEnding);
+  getCityWeather(city: string, country: string) {
+    return this.httpClient.get<any>(this.weatherURL+city+','+country+this.urlEnding);
   }
 
   getIconUrl(icon) {
     return this.iconURL+icon+'.png';
   }
 
-  getCityForecast(city: string) {
-    return this.httpClient.get<any>(this.forecastURL+city+this.urlEnding);
+  getCityForecast(city: string, country: string) {
+    return this.httpClient.get<any>(this.forecastURL+city+','+country+this.urlEnding);
   }
 }

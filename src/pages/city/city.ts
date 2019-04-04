@@ -24,15 +24,17 @@ export class CityPage {
 
   roundedTemperature: number;
   city: string;
+  country: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public weatherProvider: WeatherProvider) {
-    this.city = navParams.get('city');
+    this.city = navParams.get('name');
+    this.country = navParams.get('country');
     this.dailyWeatherList = [];
     console.log("city received "+this.city);
   }
 
   ionViewDidLoad(){
-    this.weatherProvider.getCityWeather(this.city).subscribe(
+    this.weatherProvider.getCityWeather(this.city,this.country).subscribe(
       weather =>{
 
         console.log(weather);
@@ -42,7 +44,7 @@ export class CityPage {
         this.roundedTemperature = Math.round(this.details.main.temp);
       }
     );
-    this.weatherProvider.getCityForecast(this.city).subscribe(
+    this.weatherProvider.getCityForecast(this.city,this.country).subscribe(
       forecast =>{
 
         console.log(forecast);
@@ -69,13 +71,16 @@ export class CityPage {
             }
           }
           else {
+
+            console.log(days[CityPage.getPreviousDay(date.getDay())]+" : "+temperatures);
             context.dailyWeatherList.push({
-              dayName: days[date.getDay()],
+              dayName: days[CityPage.getPreviousDay(date.getDay())],
               icon: icon,
               tempMin:  Math.min.apply(Math,temperatures),
               tempMax: Math.max.apply(Math,temperatures)
-            })
+            });
 
+            console.log(value);
             oldDate = date.getDay();
             temperatures = []; temperatures.push(Math.round(value.main.temp));
           }
@@ -94,6 +99,11 @@ export class CityPage {
     );
   }
 
+  static getPreviousDay(day: number){
+    let newDay = day-1;
+    if (newDay<0) newDay=6;
+    return newDay;
+  }
   /*getIconUrl(){
     return this.weatherProvider.getIconUrl(this.details.weather[0].icon);
   }*/
