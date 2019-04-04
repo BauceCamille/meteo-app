@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { CityPage } from "../city/city";
 import {WeatherProvider} from "../../providers/weather/weather";
-import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Geolocation } from '@ionic-native/geolocation';
 
 @Component({
   selector: 'page-home',
@@ -40,15 +40,14 @@ export class HomePage {
 
     console.log(this.cityList);
 
-    /*//Current location
-    console.log(geolocation);
+    //Current location
+    console.log(geolocation.getCurrentPosition);
     this.geolocation.getCurrentPosition().then((resp) => {
-      //this.currentLocation.lat = resp.coords.latitude;
-      //this.currentLocation.lon = resp.coords.longitude;
+      this.currentLocation.lat = resp.coords.latitude;
+      this.currentLocation.lon = resp.coords.longitude;
     }).catch((error) => {
       console.log('Error getting location', error);
     });
-*/
   }
 
   navToCityDetails(event,city){
