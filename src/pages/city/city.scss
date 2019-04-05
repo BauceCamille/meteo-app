@@ -1,47 +1,36 @@
 page-city {
 
-}
+  ion-label {
+    color: white;
+  }
 
-ion-content {
-  background-image: url('../../assets/imgs/backgroung.jpg');
-  -webkit-background-image: url('../../assets/imgs/backgroung.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-}
+  .tempMin {
+    color: #b2b2b2;
+  }
 
+  .city {
+    font-size: 30px;
+  }
 
-ion-label {
-  color: white;
-}
+  .weather {
+    font-size: 15px;
+  }
 
-.text-center {
-  text-align: center;
-}
+  .temp {
+    font-size: 100px;
+  }
 
-.tempMin {
-  color: #b2b2b2;
-}
+  .icon {
+    height: 29px;
+  }
 
-.city {
-  font-size: 30px;
-}
-.weather {
-  font-size: 15px;
-}
-.temp {
-  font-size: 100px;
-}
+  ion-grid {
+    height: 100%;
+  }
 
+  .item-trns {
+    border-color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
+  }
 
-.icon {
-  height: 29px;
-}
-
-ion-grid {
-  height: 100%;
-}
-
-.item-trns {
-  border-color: rgba(0, 0, 0, 0);
-  background-color: rgba(0, 0, 0, 0);
 }

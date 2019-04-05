@@ -1,20 +1,31 @@
 page-home {
 
+  ion-content {
+    //background-image: none;   if removed stay none even on city page
+  }
+
+  ion-item {
+    padding: 0;
+    margin: 0;
+  }
+
+  ion-col.col {
+    padding: 0;
+  }
+
+  ion-col{
+    background: transparent;
+  }
+
 }
 
 ion-content {
-  //background-image: none;   if removed stay none even on city page
+  background-image: url('../../assets/imgs/backgroung.jpg');
+  -webkit-background-image: url('../../assets/imgs/backgroung.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-ion-item {
-  padding: 0;
-  margin: 0;
-}
-
-ion-col.col {
-  padding: 0;
-}
-
-ion-col{
-  background: transparent;
+.text-center {
+  text-align: center;
 }
