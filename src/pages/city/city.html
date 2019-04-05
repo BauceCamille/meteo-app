@@ -37,10 +37,31 @@
       </ion-col>
     </ion-row>
 
+    <!--<ion-row style="height: 50%; ">
+      <ion-col>
+        <ion-list no-lines *ngIf = "dailyWeatherList && dailyWeatherList.length>0">
+          <ion-item class="item-trns" *ngFor="let day of dailyWeatherList">
+            <ion-row>
+              <ion-col col-5>
+                <p>{{day.dayName}}</p>
+              </ion-col>
+              <ion-col col-3>
+                <img [src]="day.icon" alt="icon">
+              </ion-col>
+              <ion-col col-2>
+                <p class="tempMax text-center">{{day.tempMax}}</p>
+              </ion-col>
+              <ion-col col-2>
+                <p class="tempMin text-center">{{day.tempMin}}</p>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row> -->
+
     <ion-row style="height: 50%; ">
       <ion-col>
-
-
         <ion-list no-lines *ngIf = "dailyWeatherList && dailyWeatherList.length>0">
           <ion-item class="item-trns" *ngFor="let day of dailyWeatherList">
             <ion-label item-left>{{day.dayName}}</ion-label>
@@ -49,12 +70,7 @@
             <ion-label item-right class="tempMin text-center">{{day.tempMin}}</ion-label>
           </ion-item>
         </ion-list>
-
-
-
-
       </ion-col>
-
     </ion-row>
 
   </ion-grid>

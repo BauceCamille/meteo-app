@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ModalController } from 'ionic-angular';
 import { CityPage } from "../city/city";
-import {WeatherProvider} from "../../providers/weather/weather";
+import { WeatherProvider } from "../../providers/weather/weather";
 import { Geolocation } from '@ionic-native/geolocation';
+import { AddCityPage } from '../add-city/add-city';
 
 @Component({
   selector: 'page-home',
@@ -13,43 +14,42 @@ export class HomePage {
   cityList: Array<{name: string, country: string, icon?: string, temp?: number}>;
   currentLocation: {name: string, country: string, icon?: string, temp?: number};
 
-  constructor(public navCtrl: NavController, public weatherProvider: WeatherProvider, public geolocation: Geolocation) {
+  constructor(public navCtrl: NavController, public weatherProvider: WeatherProvider, public geolocation: Geolocation, public modalCtrl: ModalController) {
 
     //cityList / Favoris
     this.cityList = [];
     this.cityList.push({
       name: 'Nice',
-      country: 'fr',
+      country: 'FR',
     });
     this.cityList.push({
       name: 'London',
-      country: 'uk',
+      country: 'UK',
     });
     this.cityList.push({
       name: 'London',
-      country: 'ca',
+      country: 'CA',
     });
     this.cityList.push({
       name: 'Paris',
-      country: 'fr',
+      country: 'FR',
     });
     this.cityList.push({
       name: 'Menton',
-      country: 'fr',
+      country: 'FR',
     });
 
     //Current location
-    console.log(geolocation.getCurrentPosition);
     this.geolocation.getCurrentPosition().then((resp) => {
 
-      const lat = Math.round(resp.coords.latitude);
-      const lon= Math.round(resp.coords.longitude);
+      const lat = resp.coords.latitude;
+      const lon= resp.coords.longitude;
 
       this.weatherProvider.getCityWeatherByCoordinates(lat,lon).subscribe(
         weather => {
           this.currentLocation = {
             name: weather.name,
-            country: weather.sys.country.toLowerCase(),
+            country: weather.sys.country.toUpperCase(),
             temp: Math.round(weather.main.temp),
             icon: weatherProvider.getIconUrl(weather.weather[0].icon)
           }
@@ -72,13 +72,27 @@ export class HomePage {
   loadCityList(){
     const context = this;
     this.cityList.forEach(function (city) {
-      context.weatherProvider.getCityWeather(city.name, city.country).subscribe(
-        weather => {
-          city.temp = Math.round( weather.main.temp);
-          city.icon = context.weatherProvider.getIconUrl(weather.weather[0].icon);
-        }
-      );
+      context.loadCity(city);
     });
   }
 
+  loadCity(city){
+    this.weatherProvider.getCityWeather(city.name, city.country).subscribe(
+      weather => {
+        city.temp = Math.round( weather.main.temp);
+        city.icon = this.weatherProvider.getIconUrl(weather.weather[0].icon);
+      }
+    );
+  }
+
+  addCity() {
+    const modal = this.modalCtrl.create(AddCityPage);
+    modal.present();
+    modal.onDidDismiss( data => {
+      if(data.cancel != true){
+        this.loadCity(data.city);
+        this.cityList.push(data.city);
+      }
+    });
+  }
 }

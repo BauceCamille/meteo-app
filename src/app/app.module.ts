@@ -11,12 +11,14 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { CityPage } from '../pages/city/city';
+import { AddCityPage } from '../pages/add-city/add-city';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    CityPage
+    CityPage,
+    AddCityPage
   ],
   imports: [
     BrowserModule,
@@ -27,7 +29,8 @@ import { CityPage } from '../pages/city/city';
   entryComponents: [
     MyApp,
     HomePage,
-    CityPage
+    CityPage,
+    AddCityPage
   ],
   providers: [
     StatusBar,

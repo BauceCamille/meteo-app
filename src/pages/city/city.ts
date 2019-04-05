@@ -18,7 +18,6 @@ export class CityPage {
 
 
   details: any;
-  stringWeather: string;
 
   dailyWeatherList: Array<{dayName: string, icon: string, tempMax: number, tempMin: number}>;
 
@@ -30,23 +29,23 @@ export class CityPage {
     this.city = navParams.get('name');
     this.country = navParams.get('country');
     this.dailyWeatherList = [];
-    console.log("city received "+this.city);
   }
 
   ionViewDidLoad(){
     this.weatherProvider.getCityWeather(this.city,this.country).subscribe(
       weather =>{
 
+        console.log("weather got for "+this.city);
         console.log(weather);
 
         this.details = weather;
-        this.stringWeather = JSON.stringify(weather);
         this.roundedTemperature = Math.round(this.details.main.temp);
       }
     );
     this.weatherProvider.getCityForecast(this.city,this.country).subscribe(
       forecast =>{
 
+        console.log("forecast got for"+this.city+" :");
         console.log(forecast);
 
         const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -71,8 +70,6 @@ export class CityPage {
             }
           }
           else {
-
-            console.log(days[CityPage.getPreviousDay(date.getDay())]+" : "+temperatures);
             context.dailyWeatherList.push({
               dayName: days[CityPage.getPreviousDay(date.getDay())],
               icon: icon,
@@ -80,7 +77,6 @@ export class CityPage {
               tempMax: Math.max.apply(Math,temperatures)
             });
 
-            console.log(value);
             oldDate = date.getDay();
             temperatures = []; temperatures.push(Math.round(value.main.temp));
           }
@@ -104,9 +100,6 @@ export class CityPage {
     if (newDay<0) newDay=6;
     return newDay;
   }
-  /*getIconUrl(){
-    return this.weatherProvider.getIconUrl(this.details.weather[0].icon);
-  }*/
 
   getIconUrl(icon){
     return this.weatherProvider.getIconUrl(icon);
