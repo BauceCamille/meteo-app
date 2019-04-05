@@ -89,7 +89,7 @@ export class HomePage {
     const modal = this.modalCtrl.create(AddCityPage);
     modal.present();
     modal.onDidDismiss( data => {
-      if(data.cancel != true){
+      if(data!=null && data.cancel != true){
         this.loadCity(data.city);
         this.cityList.push(data.city);
       }
