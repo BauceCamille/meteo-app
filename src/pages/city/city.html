@@ -8,23 +8,36 @@
 
 <ion-content overflow-scroll="false">
 
-  <ion-grid *ngIf = "details">
-    <ion-row>
-      <ion-col >
-        <!-- Displaying weather location -->
-        <ion-label class="city text-center">{{details.name}}</ion-label>
-
-        <!--Displaying weather icon -->
-        <ion-label class="weather text-center">{{ details.weather[0].description }}</ion-label>
-
-        <!-- Displaying weather description -->
-        <ion-label *ngIf = "roundedTemperature" class="temp text-center">{{roundedTemperature}}°</ion-label>
-
-
-      </ion-col>
+  <ion-grid fixed *ngIf = "details">
+    <ion-row style="height: 10%;">
 
     </ion-row>
-    <ion-row>
+
+    <ion-row style="height: 10%;">
+      <ion-col >
+        <ion-label class="city text-center">{{details.name}}</ion-label>
+      </ion-col>
+    </ion-row>
+
+    <ion-row style="height: 5%;">
+      <ion-col>
+        <ion-label class="weather text-center">{{ details.weather[0].description }}</ion-label>
+      </ion-col>
+    </ion-row>
+
+    <ion-row style="height: 25%;">
+      <ion-col>
+        <ion-label *ngIf = "roundedTemperature" class="temp text-center">{{roundedTemperature}}°</ion-label>
+      </ion-col>
+    </ion-row>
+
+    <ion-row align-items-center style="height: 10%;">
+      <ion-col>
+        <hr width="90%" size="3" color="white">
+      </ion-col>
+    </ion-row>
+
+    <ion-row style="height: 50%; ">
       <ion-col>
 
 
