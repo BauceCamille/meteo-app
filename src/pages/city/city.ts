@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { WeatherProvider } from "../../providers/weather/weather";
+import {CityModel} from "../../models/city-model";
 
 /**
  * Generated class for the CityPage page.
@@ -15,37 +16,41 @@ import { WeatherProvider } from "../../providers/weather/weather";
 })
 export class CityPage {
 
-
-
   details: any;
 
   dailyWeatherList: Array<{dayName: string, icon: string, tempMax: number, tempMin: number}>;
 
   roundedTemperature: number;
-  city: string;
-  country: string;
+  city: CityModel;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public weatherProvider: WeatherProvider) {
-    this.city = navParams.get('name');
-    this.country = navParams.get('country');
+    this.city = navParams.get('city');
     this.dailyWeatherList = [];
   }
 
   ionViewDidLoad(){
-    this.weatherProvider.getCityWeather(this.city,this.country).then(
+    this.loadCityWeather();
+    this.loadCityForecast();
+  }
+
+  loadCityWeather() {
+    this.weatherProvider.getCityWeather(this.city).then(
       weather =>{
 
-        console.log("weather got for "+this.city);
+        console.log("weather got for "+this.city.name);
         console.log(weather);
 
         this.details = weather;
         this.roundedTemperature = Math.round(this.details.main.temp);
       }
     );
-    this.weatherProvider.getCityForecast(this.city,this.country).then(
+  }
+
+  loadCityForecast() {
+    this.weatherProvider.getCityForecast(this.city).then(
       forecast =>{
 
-        console.log("forecast got for"+this.city+" :");
+        console.log("forecast got for "+this.city.name+" :");
         console.log(forecast);
 
         const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -55,6 +60,7 @@ export class CityPage {
         let oldDate = (new Date().getDay()+1)%7;
         let icon;
 
+        //for each dated weather received regroup and compute by day
         forecast.list.forEach(function(value){
           const date = new Date(value.dt_txt);
 
@@ -64,8 +70,8 @@ export class CityPage {
           else if (date.getDay() == oldDate) {
             temperatures.push(Math.round(value.main.temp));
 
-            //Weather icon is set to the weather at 12h00
-            if(date.getHours() == 12){
+            //Weather icon is set to the weather at 12h00 (or before for last day)
+            if(date.getHours() <= 12){
               icon = context.getIconUrl(value.weather[0].icon)
             }
           }
@@ -82,6 +88,7 @@ export class CityPage {
           }
         });
 
+        //push the infos of the last day into the list. (last day can be incomplete)
         this.dailyWeatherList.push(
           {
             dayName:  days[oldDate],

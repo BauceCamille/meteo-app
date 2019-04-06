@@ -4,6 +4,7 @@ import { CityPage } from "../city/city";
 import { WeatherProvider } from "../../providers/weather/weather";
 import { Geolocation } from '@ionic-native/geolocation';
 import { AddCityPage } from '../add-city/add-city';
+import { CityModel } from '../../models/city-model'
 
 @Component({
   selector: 'page-home',
@@ -11,8 +12,9 @@ import { AddCityPage } from '../add-city/add-city';
 })
 export class HomePage {
 
-  cityList: Array<{name: string, country: string, icon?: string, temp?: number}>;
-  currentLocation: {name: string, country: string, icon?: string, temp?: number};
+  cityList: Array<CityModel>;
+
+  currentLocation: CityModel;
 
   constructor(public navCtrl: NavController, public weatherProvider: WeatherProvider, public geolocation: Geolocation, public modalCtrl: ModalController) {
 
@@ -41,7 +43,7 @@ export class HomePage {
   }
 
   navToCityDetails(event,city){
-      this.navCtrl.push(CityPage,city);
+      this.navCtrl.push(CityPage,{city: city});
   }
 
   ionViewDidLoad() {
@@ -70,7 +72,7 @@ export class HomePage {
   }
 
   loadCity(city){
-    this.weatherProvider.getCityWeather(city.name, city.country).then(
+    this.weatherProvider.getCityWeather(city).then(
       weather => {
         city.temp = Math.round( weather.main.temp);
         city.icon = this.weatherProvider.getIconUrl(weather.weather[0].icon);

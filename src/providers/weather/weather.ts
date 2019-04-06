@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import 'rxjs/add/operator/map';
+import {CityModel} from "../../models/city-model";
 
 /*
   Generated class for the WeatherProvider provider.
@@ -24,30 +25,28 @@ export class WeatherProvider {
     this.urlEnding = '&APPID='+this.apiKey+'&units='+this.unit;
   }
 
-  getCityWeather(city: string, country: string) {
+  getCityWeather(city: CityModel) {
     return new Promise<any>(resolve => {
-      this.httpClient.get(this.weatherURL+'q='+city+','+country+this.urlEnding).subscribe(data => {
+      this.httpClient.get(this.weatherURL+'q='+city.name+','+city.country+this.urlEnding).subscribe(data => {
         resolve(data);},
         err => {
         console.log(err);
         });
     });
-    //return this.httpClient.get<any>(this.weatherURL+'q='+city+','+country+this.urlEnding);
   }
 
   getIconUrl(icon) {
     return this.iconURL+icon+'.png';
   }
 
-  getCityForecast(city: string, country: string) {
+  getCityForecast(city: CityModel) {
     return new Promise<any>(resolve => {
-      this.httpClient.get(this.forecastURL+'q='+city+','+country+this.urlEnding).subscribe(data => {
+      this.httpClient.get(this.forecastURL+'q='+city.name+','+city.country+this.urlEnding).subscribe(data => {
         resolve(data);},
         err => {
         console.log(err);
       });
     });
-    //return this.httpClient.get<any>(this.forecastURL+'q='+city+','+country+this.urlEnding);
   }
 
   getCityWeatherByCoordinates(lat: number, lon: number) {
@@ -58,6 +57,5 @@ export class WeatherProvider {
         console.log(err);
         });
     });
-    //return this.httpClient.get<any>(this.weatherURL+'lat='+lat+'&lon='+lon+this.urlEnding);
   }
 }

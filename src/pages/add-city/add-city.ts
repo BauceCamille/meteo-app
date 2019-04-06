@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {NavController, ViewController} from 'ionic-angular';
 import { HttpClient } from "@angular/common/http";
+import {CityModel} from "../../models/city-model";
 
 /**
  * Generated class for the AddCityPage page.
@@ -14,8 +15,8 @@ import { HttpClient } from "@angular/common/http";
   templateUrl: 'add-city.html',
 })
 export class AddCityPage {
-  countryList: any;
-  city: {name: string,country: string};
+  countryList: Array<any>;
+  city: CityModel;
 
   constructor(public navCtrl: NavController, public viewCtrl: ViewController, public httpClient: HttpClient) {
 
