@@ -25,7 +25,14 @@ export class WeatherProvider {
   }
 
   getCityWeather(city: string, country: string) {
-    return this.httpClient.get<any>(this.weatherURL+'q='+city+','+country+this.urlEnding);
+    return new Promise<any>(resolve => {
+      this.httpClient.get(this.weatherURL+'q='+city+','+country+this.urlEnding).subscribe(data => {
+        resolve(data);},
+        err => {
+        console.log(err);
+        });
+    });
+    //return this.httpClient.get<any>(this.weatherURL+'q='+city+','+country+this.urlEnding);
   }
 
   getIconUrl(icon) {
@@ -33,10 +40,24 @@ export class WeatherProvider {
   }
 
   getCityForecast(city: string, country: string) {
-    return this.httpClient.get<any>(this.forecastURL+'q='+city+','+country+this.urlEnding);
+    return new Promise<any>(resolve => {
+      this.httpClient.get(this.forecastURL+'q='+city+','+country+this.urlEnding).subscribe(data => {
+        resolve(data);},
+        err => {
+        console.log(err);
+      });
+    });
+    //return this.httpClient.get<any>(this.forecastURL+'q='+city+','+country+this.urlEnding);
   }
 
   getCityWeatherByCoordinates(lat: number, lon: number) {
-    return this.httpClient.get<any>(this.weatherURL+'lat='+lat+'&lon='+lon+this.urlEnding);
+    return new Promise<any>(resolve => {
+      this.httpClient.get(this.weatherURL+'lat='+lat+'&lon='+lon+this.urlEnding).subscribe(data => {
+        resolve(data);},
+        err => {
+        console.log(err);
+        });
+    });
+    //return this.httpClient.get<any>(this.weatherURL+'lat='+lat+'&lon='+lon+this.urlEnding);
   }
 }

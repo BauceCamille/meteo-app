@@ -32,7 +32,7 @@ export class CityPage {
   }
 
   ionViewDidLoad(){
-    this.weatherProvider.getCityWeather(this.city,this.country).subscribe(
+    this.weatherProvider.getCityWeather(this.city,this.country).then(
       weather =>{
 
         console.log("weather got for "+this.city);
@@ -42,7 +42,7 @@ export class CityPage {
         this.roundedTemperature = Math.round(this.details.main.temp);
       }
     );
-    this.weatherProvider.getCityForecast(this.city,this.country).subscribe(
+    this.weatherProvider.getCityForecast(this.city,this.country).then(
       forecast =>{
 
         console.log("forecast got for"+this.city+" :");

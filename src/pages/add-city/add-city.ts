@@ -27,10 +27,9 @@ export class AddCityPage {
   }
 
   loadCountryList() {
-    this.httpClient.get<any>('https://restcountries.eu/rest/v2/all').subscribe(
-      countries =>{
+    this.getCountries().then(countries => {
       this.countryList = countries;
-    });
+    })
   }
 
   sendData(isGood: boolean) {
@@ -38,6 +37,16 @@ export class AddCityPage {
     this.viewCtrl.dismiss({
       cancel: !isGood,
       city: this.city
+    });
+  }
+
+  getCountries(){
+    return new Promise<any>(resolve => {
+      this.httpClient.get('https://restcountries.eu/rest/v2/all').subscribe(data => {
+        resolve(data);},
+        err => {
+        console.log(err);
+        });
     });
   }
 

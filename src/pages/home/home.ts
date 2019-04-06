@@ -38,27 +38,6 @@ export class HomePage {
       name: 'Menton',
       country: 'FR',
     });
-
-    //Current location
-    this.geolocation.getCurrentPosition().then((resp) => {
-
-      const lat = resp.coords.latitude;
-      const lon= resp.coords.longitude;
-
-      this.weatherProvider.getCityWeatherByCoordinates(lat,lon).subscribe(
-        weather => {
-          this.currentLocation = {
-            name: weather.name,
-            country: weather.sys.country.toUpperCase(),
-            temp: Math.round(weather.main.temp),
-            icon: weatherProvider.getIconUrl(weather.weather[0].icon)
-          }
-        }
-      );
-    }).catch((error) => {
-      console.log('Error getting location', error);
-    });
-
   }
 
   navToCityDetails(event,city){
@@ -67,6 +46,20 @@ export class HomePage {
 
   ionViewDidLoad() {
     this.loadCityList();
+
+    //Current location
+    this.geolocation.getCurrentPosition().then((resp) => {
+      const lat = resp.coords.latitude;
+      const lon= resp.coords.longitude;
+
+      this.weatherProvider.getCityWeatherByCoordinates(lat,lon).then(
+        weather => {
+          this.loadCurrentLocation(weather);
+        }
+      );
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
   }
 
   loadCityList(){
@@ -77,12 +70,21 @@ export class HomePage {
   }
 
   loadCity(city){
-    this.weatherProvider.getCityWeather(city.name, city.country).subscribe(
+    this.weatherProvider.getCityWeather(city.name, city.country).then(
       weather => {
         city.temp = Math.round( weather.main.temp);
         city.icon = this.weatherProvider.getIconUrl(weather.weather[0].icon);
       }
     );
+  }
+
+  loadCurrentLocation(weather) {
+    this.currentLocation = {
+      name: weather.name,
+      country: weather.sys.country.toUpperCase(),
+      temp: Math.round(weather.main.temp),
+      icon: this.weatherProvider.getIconUrl(weather.weather[0].icon)
+    }
   }
 
   addCity() {
